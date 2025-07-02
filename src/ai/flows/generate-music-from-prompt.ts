@@ -1,4 +1,5 @@
 'use server';
+
 /**
  * @fileOverview AI music generation from prompts. Allows users to enter a prompt
  * describing the type of music they want to hear, and generates a track based on that input.
@@ -53,24 +54,38 @@ async function toWav(
   });
 }
 
+const lyricsPrompt = ai.definePrompt({
+  name: 'generateLyricsPrompt',
+  input: { schema: GenerateMusicInputSchema },
+  prompt: `You are a creative songwriter. Based on the following prompt, write a short, single-verse song or poem.
+  
+  Prompt: {{{prompt}}}
+  
+  Be creative and interpret the prompt musically. The output should be just the lyrics, no titles or other text.`,
+});
+
+
 const generateMusicFlow = ai.defineFlow(
   {
     name: 'generateMusicFlow',
     inputSchema: GenerateMusicInputSchema,
     outputSchema: GenerateMusicOutputSchema,
   },
-  async input => {
-    const {media} = await ai.generate({
+  async (input) => {
+    const lyricsResponse = await lyricsPrompt(input);
+    const lyrics = lyricsResponse.text;
+
+    const { media } = await ai.generate({
       model: 'googleai/gemini-2.5-flash-preview-tts',
       config: {
         responseModalities: ['AUDIO'],
         speechConfig: {
           voiceConfig: {
-            prebuiltVoiceConfig: {voiceName: 'Algenib'},
+            prebuiltVoiceConfig: { voiceName: 'Algenib' },
           },
         },
       },
-      prompt: input.prompt,
+      prompt: lyrics,
     });
     if (!media) {
       throw new Error('no media returned');

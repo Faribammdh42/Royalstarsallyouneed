@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Home, Mic, Music, Clapperboard, MessageSquare, User, Upload, Settings, LogOut } from 'lucide-react';
+import { Home, Mic, Music, Clapperboard, MessageSquare, User, Upload, Settings, LogOut, Globe } from 'lucide-react';
 import { Logo } from './logo';
 
 const navItems = [
@@ -14,13 +14,14 @@ const navItems = [
   { href: '/sing', label: 'Sing', icon: Mic },
   { href: '/chats', label: 'Chats', icon: MessageSquare },
   { href: '/upload', label: 'Upload', icon: Upload },
+  { href: '/connect', label: 'Connect', icon: Globe },
 ];
 
-export function MainNav({ className }: { className?: string }) {
+export function MainNav() {
   const pathname = usePathname();
 
   return (
-    <div className={cn("flex flex-col h-full bg-background/80 justify-between p-4", className)}>
+    <div className="flex flex-col h-full bg-background/80 justify-between p-4 w-full">
       <div>
         <div className="p-4 mb-4 flex items-center gap-4">
            <Logo />

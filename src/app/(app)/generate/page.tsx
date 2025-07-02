@@ -6,10 +6,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { generateMusic } from '@/ai/flows/generate-music-from-prompt';
 import { Loader2, Music4, Wand2, CheckCircle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAppContext } from '@/context/app-context';
+import { generateMusic } from '@/ai/flows/generate-music-from-prompt';
 
 export default function GeneratePage() {
   const { toast } = useToast();
@@ -29,26 +29,28 @@ export default function GeneratePage() {
     }
     setIsLoading(true);
     setIsGenerated(false);
+    
     try {
       const result = await generateMusic({ prompt });
-      setIsGenerated(true);
-      
+
       const newTrack = {
-        title: prompt.length > 50 ? prompt.substring(0, 47) + '...' : prompt,
-        artist: 'AI Generated',
-        imageUrl: `https://placehold.co/300x300`,
-        dataAiHint: 'abstract music',
+        title: prompt.length > 30 ? prompt.substring(0, 27) + '...' : prompt,
+        artist: 'AI Generator',
+        imageUrl: `https://placehold.co/300x300.png`,
+        dataAiHint: 'ai music',
         audioUrl: result.musicDataUri,
       };
+
       addAiTrack(newTrack);
       playTrack(newTrack);
 
+      setIsGenerated(true);
       toast({
         title: 'Music Generated!',
-        description: 'Your track is ready and is now playing.',
+        description: 'Your new track has been added and is now playing.',
       });
     } catch (error) {
-      console.error(error);
+      console.error('Error generating music:', error);
       toast({
         title: 'Generation Failed',
         description: 'Something went wrong. Please try again.',

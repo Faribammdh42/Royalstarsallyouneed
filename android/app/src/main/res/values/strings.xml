@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Royalstars</string>
+    <string name="title_activity_main">Royalstars</string>
+    <string name="package_name">com.royalstars.app</string>
+    <string name="custom_url_scheme">com.royalstars.app</string>
+</resources>

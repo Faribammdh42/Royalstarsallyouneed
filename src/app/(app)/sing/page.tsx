@@ -1,4 +1,7 @@
+'use client';
+
 import { PageHeader } from '@/components/page-header';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
 import { Play, Pause, SkipBack, Mic, Volume2 } from 'lucide-react';

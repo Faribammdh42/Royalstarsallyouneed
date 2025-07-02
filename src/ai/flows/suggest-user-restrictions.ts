@@ -43,9 +43,6 @@ Consider the following:
 - A fair daily limit for all users.
 - Whether the user should be offered access to premium features to increase their limit.
 - The reason for the suggested restrictions.
-
-Respond with a JSON object that conforms to the following schema:
-${JSON.stringify(SuggestUserRestrictionsOutputSchema)}
 `,
 });
 

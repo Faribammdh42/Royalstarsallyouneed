@@ -20,7 +20,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     return null; // Or a loader
   }
 
-  const sidebarWidth = 'w-72';
   const playerHeight = 'h-20';
   const mobileNavHeight = 'h-20';
 
@@ -29,20 +28,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <div className="min-h-screen bg-background text-foreground">
         <div className="flex">
           {/* Desktop Sidebar */}
-          <aside className={cn("hidden md:block border-r bg-background/50", sidebarWidth)}>
-            <div className="fixed top-0 h-full">
-              <MainNav className={sidebarWidth} />
-            </div>
+          <aside className="hidden md:block fixed top-0 left-0 h-full w-72 border-r bg-background/50 z-20">
+            <MainNav />
           </aside>
 
           {/* Main Content */}
-          <main
-            className={cn(
-              'flex-1 transition-[margin-left]',
-              !isMobile && sidebarWidth,
-              'pb-40' // Padding for both player and mobile nav
-            )}
-          >
+          <main className="flex-1 md:ml-72 pb-40">
             {children}
           </main>
         </div>
@@ -58,7 +49,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         {/* Music Player */}
         <div className={cn(
           "fixed bottom-0 left-0 right-0 z-50",
-          !isMobile && `left-0 ${sidebarWidth}`,
+          !isMobile && 'md:left-72',
           isMobile && `bottom-20`, // Position above mobile nav
         )}>
            <MusicPlayer className={playerHeight} />
