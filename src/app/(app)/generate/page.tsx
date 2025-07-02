@@ -6,14 +6,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { generateMusic, GenerateMusicOutput } from '@/ai/flows/generate-music-from-prompt';
-import { Loader2, Music4, Wand2 } from 'lucide-react';
+import { generateMusic } from '@/ai/flows/generate-music-from-prompt';
+import { Loader2, Music4, Wand2, CheckCircle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useAppContext } from '@/context/app-context';
 
 export default function GeneratePage() {
   const { toast } = useToast();
+  const { addAiTrack, playTrack } = useAppContext();
   const [prompt, setPrompt] = React.useState('');
-  const [generationResult, setGenerationResult] = React.useState<GenerateMusicOutput | null>(null);
+  const [isGenerated, setIsGenerated] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
   const handleGenerate = async () => {
@@ -26,13 +28,24 @@ export default function GeneratePage() {
       return;
     }
     setIsLoading(true);
-    setGenerationResult(null);
+    setIsGenerated(false);
     try {
       const result = await generateMusic({ prompt });
-      setGenerationResult(result);
+      setIsGenerated(true);
+      
+      const newTrack = {
+        title: prompt.length > 50 ? prompt.substring(0, 47) + '...' : prompt,
+        artist: 'AI Generated',
+        imageUrl: `https://placehold.co/300x300`,
+        dataAiHint: 'abstract music',
+        audioUrl: result.musicDataUri,
+      };
+      addAiTrack(newTrack);
+      playTrack(newTrack);
+
       toast({
         title: 'Music Generated!',
-        description: 'Your track is ready to be played.',
+        description: 'Your track is ready and is now playing.',
       });
     } catch (error) {
       console.error(error);
@@ -66,7 +79,10 @@ export default function GeneratePage() {
               placeholder="e.g., 'A funky synth-pop track with a groovy bassline, inspired by the 80s'"
               rows={5}
               value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
+              onChange={(e) => {
+                setPrompt(e.target.value);
+                setIsGenerated(false);
+              }}
               disabled={isLoading}
             />
           </CardContent>
@@ -97,12 +113,11 @@ export default function GeneratePage() {
                         <Skeleton className="h-4 w-3/4" />
                         <Skeleton className="h-4 w-1/2" />
                     </div>
-                ) : generationResult ? (
-                    <div className="w-full">
-                        <p className="text-lg font-semibold text-center mb-4">Your track is ready!</p>
-                        <audio controls src={generationResult.musicDataUri} className="w-full">
-                            Your browser does not support the audio element.
-                        </audio>
+                ) : isGenerated ? (
+                    <div className="text-center text-green-500">
+                      <CheckCircle className="size-16 mx-auto mb-4" />
+                      <p className="text-lg font-semibold">Generation Complete!</p>
+                      <p className="text-muted-foreground">Your new track is playing now.</p>
                     </div>
                 ) : (
                     <div className="text-center text-muted-foreground">

@@ -10,9 +10,10 @@ interface TrackCardProps {
   imageUrl: string;
   className?: string;
   dataAiHint?: string;
+  onPlay?: () => void;
 }
 
-export function TrackCard({ title, artist, imageUrl, className, dataAiHint }: TrackCardProps) {
+export function TrackCard({ title, artist, imageUrl, className, dataAiHint, onPlay }: TrackCardProps) {
   return (
     <Card className={cn("group overflow-hidden relative border-0 shadow-lg", className)}>
       <CardContent className="p-0">
@@ -36,9 +37,15 @@ export function TrackCard({ title, artist, imageUrl, className, dataAiHint }: Tr
              </Button>
           </div>
         </div>
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-           <PlayCircle className="size-16 text-white drop-shadow-lg" />
-        </div>
+        {onPlay ? (
+          <button onClick={onPlay} className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-label={`Play ${title}`}>
+             <PlayCircle className="size-16 text-white drop-shadow-lg" />
+          </button>
+        ) : (
+          <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+             <PlayCircle className="size-16 text-white drop-shadow-lg" />
+          </div>
+        )}
       </CardContent>
     </Card>
   );

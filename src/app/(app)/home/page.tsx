@@ -1,8 +1,13 @@
+'use client'
+
 import { PageHeader } from '@/components/page-header';
 import { TrackCard } from '@/components/track-card';
 import { Input } from '@/components/ui/input';
-import { Search } from 'lucide-react';
+import { Search, Music } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useAppContext } from '@/context/app-context';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const featuredTracks = [
   { title: "Neon Dream", artist: "Synthwave Surfer", imageUrl: "https://placehold.co/300x300", dataAiHint: "synthwave album" },
@@ -14,6 +19,8 @@ const featuredTracks = [
 ];
 
 export default function HomePage() {
+  const { aiTracks, playTrack } = useAppContext();
+
   return (
     <div className="container mx-auto px-4 py-8">
       <PageHeader title="Discover Music" description="Find new tracks, artists, and genres to explore.">
@@ -39,8 +46,23 @@ export default function HomePage() {
         <TabsContent value="new" className="mt-6 text-center text-muted-foreground">
           <p>New releases coming soon!</p>
         </TabsContent>
-        <TabsContent value="ai" className="mt-6 text-center text-muted-foreground">
-          <p>AI generated content will appear here.</p>
+        <TabsContent value="ai" className="mt-6">
+           {aiTracks.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+              {aiTracks.map((track, index) => (
+                <TrackCard key={`${track.title}-${index}`} {...track} onPlay={() => playTrack(track)} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 text-muted-foreground flex flex-col items-center gap-4">
+              <Music className="size-12" />
+              <p className="font-semibold">No AI tracks yet!</p>
+              <p>Your generated music will appear here.</p>
+              <Button asChild>
+                <Link href="/generate">Generate Music</Link>
+              </Button>
+            </div>
+          )}
         </TabsContent>
       </Tabs>
     </div>
