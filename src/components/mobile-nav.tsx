@@ -7,11 +7,11 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { Home, Mic, Music, MessageSquare, User, Gift } from 'lucide-react';
 
 const navItems = [
-  { href: '/home', label: 'خانه', icon: Home },
-  { href: '/gifts', label: 'گیفت', icon: Gift },
-  { href: '/record', label: 'ضبط', icon: Mic, isCentral: true },
-  { href: '/chats', label: 'چت', icon: MessageSquare },
-  { href: '/profile', label: 'پروفایل', icon: User },
+  { href: '/home', label: 'Home', icon: Home },
+  { href: '/gifts', label: 'Gifts', icon: Gift },
+  { href: '/record', label: 'Record', icon: Mic, isCentral: true },
+  { href: '/chats', label: 'Chats', icon: MessageSquare },
+  { href: '/profile', label: 'Profile', icon: User },
 ];
 
 export function MobileNav() {

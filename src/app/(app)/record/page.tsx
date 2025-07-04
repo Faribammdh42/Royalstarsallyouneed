@@ -14,19 +14,19 @@ export default function RecordPage() {
   const [volume, setVolume] = React.useState([80]);
 
   const audioEffects = [
-    { id: 'none', name: 'بدون افکت', icon: '🎤' },
-    { id: 'reverb', name: 'اکو', icon: '🌊' },
-    { id: 'autotune', name: 'اتوتیون', icon: '🤖' },
-    { id: 'chorus', name: 'کورس', icon: '🎵' },
-    { id: 'bass', name: 'بیس', icon: '🔊' }
+    { id: 'none', name: 'No Effect', icon: '🎤' },
+    { id: 'reverb', name: 'Reverb', icon: '🌊' },
+    { id: 'autotune', name: 'Autotune', icon: '🤖' },
+    { id: 'chorus', name: 'Chorus', icon: '🎵' },
+    { id: 'bass', name: 'Bass', icon: '🔊' }
   ];
 
   const videoFilters = [
-    { id: 'normal', name: 'عادی', color: 'bg-gray-100' },
-    { id: 'vintage', name: 'کلاسیک', color: 'bg-amber-100' },
-    { id: 'cool', name: 'سرد', color: 'bg-blue-100' },
-    { id: 'warm', name: 'گرم', color: 'bg-orange-100' },
-    { id: 'dramatic', name: 'دراماتیک', color: 'bg-purple-100' }
+    { id: 'normal', name: 'Normal', color: 'bg-gray-100' },
+    { id: 'vintage', name: 'Vintage', color: 'bg-amber-100' },
+    { id: 'cool', name: 'Cool', color: 'bg-blue-100' },
+    { id: 'warm', name: 'Warm', color: 'bg-orange-100' },
+    { id: 'dramatic', name: 'Dramatic', color: 'bg-purple-100' }
   ];
 
   React.useEffect(() => {

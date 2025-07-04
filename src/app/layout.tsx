@@ -12,7 +12,7 @@ const urbanist = Urbanist({
 
 export const metadata: Metadata = {
   title: 'Royal Stars',
-  description: 'پلتفرم موسیقی و خوانندگی',
+  description: 'Music and singing platform',
   manifest: '/manifest.json',
   icons: {
     icon: '/icon.png',

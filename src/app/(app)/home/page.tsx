@@ -7,8 +7,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Mic, Music, Users, Gift } from 'lucide-react';
 
 const featuredRoom = {
-  roomName: 'کلبه صمیمیت',
-  songName: 'دوست داشتم | Dooset Dashtam',
+  roomName: 'The Cozy Corner',
+  songName: 'I Loved You | Dooset Dashtam',
   participants: [
     { name: 'Sara', imageUrl: 'https://placehold.co/40x40.png', dataAiHint: 'woman portrait' },
     { name: 'Ali', imageUrl: 'https://placehold.co/40x40.png', dataAiHint: 'man portrait' },

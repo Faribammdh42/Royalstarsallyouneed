@@ -9,11 +9,11 @@ import { Home, Mic, Music, Clapperboard, MessageSquare, User, Upload, Settings, 
 import { Logo } from './logo';
 
 const navItems = [
-  { href: '/home', label: 'خانه', icon: Home },
-  { href: '/record', label: 'ضبط', icon: Video },
-  { href: '/generate', label: 'تولید', icon: Music },
-  { href: '/chats', label: 'چت‌ها', icon: MessageSquare },
-  { href: '/gifts', label: 'گیفت‌ها', icon: Gift },
+  { href: '/home', label: 'Home', icon: Home },
+  { href: '/record', label: 'Record', icon: Video },
+  { href: '/generate', label: 'Generate', icon: Music },
+  { href: '/chats', label: 'Chats', icon: MessageSquare },
+  { href: '/gifts', label: 'Gifts', icon: Gift },
 ];
 
 export function MainNav() {

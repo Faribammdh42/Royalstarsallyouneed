@@ -37,7 +37,7 @@ export default function ProfilePage() {
             
             <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
                <Badge variant="outline" className="flex items-center gap-1">
-                 IRAN
+                 Pro Member
                </Badge>
                <Badge variant="outline" className="flex items-center gap-1">
                  <Waves className="size-3 text-primary"/>
