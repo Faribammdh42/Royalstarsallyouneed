@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Urbanist', 'sans-serif'],
-        headline: ['Orbitron', 'sans-serif'],
+        body: ['var(--font-urbanist)', 'sans-serif'],
+        headline: ['var(--font-urbanist)', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {

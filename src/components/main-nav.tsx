@@ -23,9 +23,8 @@ export function MainNav() {
   return (
     <div className="flex flex-col h-full bg-background/80 justify-between p-4 w-full">
       <div>
-        <div className="p-4 mb-4 flex items-center gap-4">
+        <div className="p-4 mb-4 flex items-center justify-center">
            <Logo />
-           <h1 className="text-2xl font-headline font-bold">RoyalStars</h1>
         </div>
         <nav className="flex flex-col gap-2">
           {navItems.map((item) => {

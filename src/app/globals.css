@@ -4,48 +4,50 @@
 
 @layer base {
   :root {
-    --background: 260 50% 98%;
-    --foreground: 260 50% 10%;
+    --background: 270 50% 98%;
+    --foreground: 270 50% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 260 50% 10%;
+    --card-foreground: 270 50% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 260 50% 10%;
-    --primary: 280 85% 65%;
-    --primary-foreground: 280 100% 98%;
-    --secondary: 260 40% 95%;
-    --secondary-foreground: 260 40% 20%;
-    --muted: 260 40% 96%;
-    --muted-foreground: 260 20% 45%;
-    --accent: 180 90% 50%;
-    --accent-foreground: 180 90% 5%;
+    --popover-foreground: 270 50% 10%;
+    --primary: 330 100% 71%;
+    --primary-foreground: 330 100% 5%;
+    --secondary: 270 50% 95%;
+    --secondary-foreground: 270 50% 20%;
+    --muted: 270 50% 96%;
+    --muted-foreground: 270 20% 45%;
+    --accent: 51 100% 50%;
+    --accent-foreground: 51 100% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 260 40% 90%;
-    --input: 260 40% 92%;
-    --ring: 280 85% 65%;
+    --border: 270 50% 90%;
+    --input: 270 50% 92%;
+    --ring: 330 100% 71%;
     --radius: 0.8rem;
+    --purple-accent: 300 100% 25.1%;
   }
  
   .dark {
-    --background: 260 50% 5%;
-    --foreground: 260 50% 95%;
-    --card: 260 50% 8%;
-    --card-foreground: 260 50% 95%;
-    --popover: 260 50% 5%;
-    --popover-foreground: 260 50% 95%;
-    --primary: 280 85% 65%;
-    --primary-foreground: 280 100% 98%;
-    --secondary: 260 40% 15%;
-    --secondary-foreground: 260 50% 95%;
-    --muted: 260 40% 15%;
-    --muted-foreground: 260 30% 65%;
-    --accent: 180 90% 50%;
-    --accent-foreground: 180 90% 5%;
+    --background: 270 40% 5%;
+    --foreground: 270 40% 95%;
+    --card: 270 40% 8%;
+    --card-foreground: 270 40% 95%;
+    --popover: 270 40% 5%;
+    --popover-foreground: 270 40% 95%;
+    --primary: 330 90% 65%;
+    --primary-foreground: 330 90% 5%;
+    --secondary: 270 40% 15%;
+    --secondary-foreground: 270 40% 95%;
+    --muted: 270 40% 15%;
+    --muted-foreground: 270 30% 65%;
+    --accent: 51 100% 50%;
+    --accent-foreground: 51 100% 10%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 260 40% 18%;
-    --input: 260 40% 18%;
-    --ring: 280 85% 65%;
+    --border: 270 40% 18%;
+    --input: 270 40% 18%;
+    --ring: 330 90% 65%;
+    --purple-accent: 300 100% 75%;
   }
 }
  
@@ -61,7 +63,7 @@
 @layer utilities {
   .holo-button {
     @apply relative overflow-hidden bg-primary text-primary-foreground transition-transform duration-300 ease-in-out hover:scale-105;
-    background-image: conic-gradient(from var(--gradient-angle, 0deg), hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
+    background-image: conic-gradient(from var(--gradient-angle, 0deg), hsl(var(--primary)), hsl(var(--purple-accent)), hsl(var(--primary)));
     animation: holo-rotation 4s linear infinite;
   }
 
