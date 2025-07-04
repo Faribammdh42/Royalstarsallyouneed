@@ -1,4 +1,4 @@
-'use server';
+// 'use server'; // Disabled for static export
 
 /**
  * @fileOverview Determines appropriate restrictions for AI music generation based on user activity.

@@ -4,14 +4,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { Home, Mic, Music, MessageSquare, User } from 'lucide-react';
+import { Home, Mic, Music, MessageSquare, User, Gift } from 'lucide-react';
 
 const navItems = [
-  { href: '/home', label: 'Home', icon: Home },
-  { href: '/generate', label: 'Generate', icon: Music },
-  { href: '/sing', label: 'Sing', icon: Mic, isCentral: true },
-  { href: '/chats', label: 'Chats', icon: MessageSquare },
-  { href: '/profile', label: 'Profile', icon: User },
+  { href: '/home', label: 'خانه', icon: Home },
+  { href: '/gifts', label: 'گیفت', icon: Gift },
+  { href: '/record', label: 'ضبط', icon: Mic, isCentral: true },
+  { href: '/chats', label: 'چت', icon: MessageSquare },
+  { href: '/profile', label: 'پروفایل', icon: User },
 ];
 
 export function MobileNav() {

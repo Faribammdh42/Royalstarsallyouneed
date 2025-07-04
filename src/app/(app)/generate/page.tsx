@@ -9,7 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2, Music4, Wand2, CheckCircle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAppContext } from '@/context/app-context';
-import { generateMusic } from '@/ai/flows/generate-music-from-prompt';
+// import { generateMusic } from '@/ai/flows/generate-music-from-prompt'; // Disabled for static export
 
 export default function GeneratePage() {
   const { toast } = useToast();
@@ -31,14 +31,15 @@ export default function GeneratePage() {
     setIsGenerated(false);
     
     try {
-      const result = await generateMusic({ prompt });
-
+      // Simulate AI generation for demo
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      
       const newTrack = {
         title: prompt.length > 30 ? prompt.substring(0, 27) + '...' : prompt,
         artist: 'AI Generator',
         imageUrl: `https://placehold.co/300x300.png`,
         dataAiHint: 'ai music',
-        audioUrl: result.musicDataUri,
+        audioUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav',
       };
 
       addAiTrack(newTrack);

@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { Urbanist } from 'next/font/google';
+import { cn } from '@/lib/utils';
 
 const urbanist = Urbanist({
   subsets: ['latin'],
@@ -10,8 +11,13 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: 'RoyalStars',
-  description: 'Discover, create, and share music.',
+  title: 'Royal Stars',
+  description: 'پلتفرم موسیقی و خوانندگی',
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon-512.png'
+  }
 };
 
 export default function RootLayout({

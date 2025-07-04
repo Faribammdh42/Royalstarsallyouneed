@@ -5,16 +5,15 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Home, Mic, Music, Clapperboard, MessageSquare, User, Upload, Settings, LogOut, Globe } from 'lucide-react';
+import { Home, Mic, Music, Clapperboard, MessageSquare, User, Upload, Settings, LogOut, Globe, Gift, Video } from 'lucide-react';
 import { Logo } from './logo';
 
 const navItems = [
-  { href: '/home', label: 'Home', icon: Home },
-  { href: '/generate', label: 'Generate', icon: Music },
-  { href: '/sing', label: 'Sing', icon: Mic },
-  { href: '/chats', label: 'Chats', icon: MessageSquare },
-  { href: '/upload', label: 'Upload', icon: Upload },
-  { href: '/connect', label: 'Connect', icon: Globe },
+  { href: '/home', label: 'خانه', icon: Home },
+  { href: '/record', label: 'ضبط', icon: Video },
+  { href: '/generate', label: 'تولید', icon: Music },
+  { href: '/chats', label: 'چت‌ها', icon: MessageSquare },
+  { href: '/gifts', label: 'گیفت‌ها', icon: Gift },
 ];
 
 export function MainNav() {
