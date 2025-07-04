@@ -27,7 +27,10 @@ export default function ProfilePage() {
             <AvatarFallback>RS</AvatarFallback>
           </Avatar>
           <div className="flex-grow text-center">
-            <h2 className="text-3xl font-bold font-headline">Royal User</h2>
+            <h2 className="text-3xl font-bold font-headline flex items-center justify-center gap-2">
+                <Crown className="size-7 text-yellow-400" />
+                Royal User
+            </h2>
             <p className="text-muted-foreground">user@email.com</p>
             
             <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">

@@ -11,7 +11,7 @@ export default {
     extend: {
       fontFamily: {
         body: ['Urbanist', 'sans-serif'],
-        headline: ['Urbanist', 'sans-serif'],
+        headline: ['Orbitron', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
