@@ -11,8 +11,8 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: 'Royal Stars',
-  description: 'Music and singing platform',
+  title: 'Royal Stars - Allyouneed Company',
+  description: 'All You Need Music Platform by Allyouneed Company',
   manifest: '/manifest.json',
   icons: {
     icon: '/icon.png',

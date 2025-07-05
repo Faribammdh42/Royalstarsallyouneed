@@ -9,11 +9,14 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2, Music4, Wand2, CheckCircle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAppContext } from '@/context/app-context';
+import { useFirestore } from '@/hooks/useFirestore';
+import { createSong } from '@/lib/database';
 // import { generateMusic } from '@/ai/flows/generate-music-from-prompt'; // Disabled for static export
 
 export default function GeneratePage() {
   const { toast } = useToast();
   const { addAiTrack, playTrack } = useAppContext();
+  const { createSong } = useFirestore();
   const [prompt, setPrompt] = React.useState('');
   const [isGenerated, setIsGenerated] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -41,6 +44,16 @@ export default function GeneratePage() {
         dataAiHint: 'ai music',
         audioUrl: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav',
       };
+
+      // Save to Firestore
+      await createSong({
+        title: newTrack.title,
+        genre: 'AI Generated',
+        audioUrl: newTrack.audioUrl,
+        lyrics: prompt,
+        isAIGenerated: true,
+        userId: 'demo-user' // Replace with actual user ID
+      });
 
       addAiTrack(newTrack);
       playTrack(newTrack);
