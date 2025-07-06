@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Home, Mic, Music, Clapperboard, MessageSquare, User, Upload, Settings, LogOut, Globe, Gift, Video } from 'lucide-react';
+import { Home, Mic, Music, Clapperboard, MessageSquare, User, Upload, Settings, LogOut, Globe, Gift, Video, Link as LinkIcon } from 'lucide-react';
 import { Logo } from './logo';
 
 const navItems = [
@@ -47,6 +47,10 @@ export function MainNav() {
       </div>
 
       <div className="flex flex-col gap-2">
+        <Button variant="outline" className="justify-start gap-3">
+            <LinkIcon className="size-5 text-muted-foreground" />
+            Connect to Google
+        </Button>
          <Link
             href="/profile"
             className={cn(

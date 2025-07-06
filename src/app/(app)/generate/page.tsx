@@ -11,6 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useAppContext } from '@/context/app-context';
 import { useFirestore } from '@/hooks/useFirestore';
 import { createSong } from '@/lib/database';
+import { DatabaseConnection } from '@/lib/db-connection';
 // import { generateMusic } from '@/ai/flows/generate-music-from-prompt'; // Disabled for static export
 
 export default function GeneratePage() {
@@ -20,6 +21,10 @@ export default function GeneratePage() {
   const [prompt, setPrompt] = React.useState('');
   const [isGenerated, setIsGenerated] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    DatabaseConnection.initializeDatabase();
+  }, []);
 
   const handleGenerate = async () => {
     if (!prompt) {

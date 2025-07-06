@@ -15,6 +15,7 @@ interface AppContextType {
   addAiTrack: (track: AiTrack) => void;
   activeTrack: AiTrack | null;
   playTrack: (track: AiTrack) => void;
+  setActiveTrack: (track: AiTrack | null) => void;
 }
 
 const AppContext = React.createContext<AppContextType | undefined>(undefined);
@@ -36,6 +37,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     addAiTrack,
     activeTrack,
     playTrack,
+    setActiveTrack,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

@@ -5,8 +5,9 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
-import { Play, Pause, SkipBack, SkipForward, Volume2, Maximize2, Heart, Loader2 } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, Maximize2, Heart, Loader2, Search } from 'lucide-react';
 import { useAppContext } from '@/context/app-context';
+import { MusicSearch } from './music-search';
 
 export function MusicPlayer({ className }: { className?: string }) {
   const { activeTrack } = useAppContext();
@@ -17,6 +18,7 @@ export function MusicPlayer({ className }: { className?: string }) {
   const [duration, setDuration] = React.useState(0);
   const [currentTime, setCurrentTime] = React.useState(0);
   const [isReady, setIsReady] = React.useState(false);
+  const [isSearchOpen, setIsSearchOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (activeTrack && audioRef.current) {
@@ -77,7 +79,11 @@ export function MusicPlayer({ className }: { className?: string }) {
         <div className={cn("bg-background/80 backdrop-blur-md border-t p-2", className)}>
             <div className="flex items-center justify-center h-full w-full gap-4 px-4 text-muted-foreground">
                 Select a track to play
+                <Button variant="ghost" size="icon" onClick={() => setIsSearchOpen(!isSearchOpen)}>
+                    <Search className="size-5" />
+                </Button>
             </div>
+            {isSearchOpen && <MusicSearch />}
         </div>
     );
   }
@@ -139,6 +145,9 @@ export function MusicPlayer({ className }: { className?: string }) {
 
         {/* Volume & Other Controls */}
         <div className="flex items-center justify-end gap-2 w-1/4">
+          <Button variant="ghost" size="icon" onClick={() => setIsSearchOpen(!isSearchOpen)}>
+            <Search className="size-5" />
+          </Button>
           <Volume2 className="hidden md:block size-5 text-muted-foreground" />
           <Slider defaultValue={[70]} max={100} step={1} className="hidden md:block w-24" 
             onValueChange={(value) => {
@@ -150,6 +159,7 @@ export function MusicPlayer({ className }: { className?: string }) {
           </Button>
         </div>
       </div>
+      {isSearchOpen && <MusicSearch />}
     </div>
   );
 }
