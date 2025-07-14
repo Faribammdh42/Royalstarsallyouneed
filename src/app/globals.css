@@ -4,27 +4,27 @@
 
 @layer base {
   :root {
-    --background: 270 60% 99%;
-    --foreground: 270 20% 15%;
-    --card: 270 60% 100%;
-    --card-foreground: 270 20% 15%;
-    --popover: 270 60% 100%;
-    --popover-foreground: 270 20% 15%;
-    --primary: 270 80% 60%;
-    --primary-foreground: 270 80% 98%;
-    --secondary: 270 60% 95%;
-    --secondary-foreground: 270 20% 25%;
-    --muted: 270 60% 96%;
-    --muted-foreground: 270 20% 45%;
-    --accent: 340 100% 65%;
-    --accent-foreground: 340 100% 98%;
-    --destructive: 0 84.2% 60.2%;
+    --background: 270 30% 6%;
+    --foreground: 270 30% 96%;
+    --card: 270 30% 10%;
+    --card-foreground: 270 30% 96%;
+    --popover: 270 30% 6%;
+    --popover-foreground: 270 30% 96%;
+    --primary: 300 100% 70%;
+    --primary-foreground: 270 80% 90%;
+    --secondary: 270 30% 15%;
+    --secondary-foreground: 270 30% 96%;
+    --muted: 270 30% 12%;
+    --muted-foreground: 270 20% 65%;
+    --accent: 300 100% 70%;
+    --accent-foreground: 270 30% 98%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 270 60% 90%;
-    --input: 270 60% 92%;
-    --ring: 270 80% 60%;
+    --border: 270 30% 20%;
+    --input: 270 30% 20%;
+    --ring: 300 100% 70%;
     --radius: 0.8rem;
-    --purple-accent: 280 100% 60%;
+    --purple-accent: 280 90% 65%;
   }
 
   .dark {
@@ -34,19 +34,19 @@
     --card-foreground: 270 30% 96%;
     --popover: 270 30% 6%;
     --popover-foreground: 270 30% 96%;
-    --primary: 270 70% 65%;
-    --primary-foreground: 270 70% 98%;
+    --primary: 300 100% 70%;
+    --primary-foreground: 270 80% 90%;
     --secondary: 270 30% 15%;
     --secondary-foreground: 270 30% 96%;
     --muted: 270 30% 12%;
     --muted-foreground: 270 20% 65%;
-    --accent: 340 100% 70%;
-    --accent-foreground: 340 100% 98%;
+    --accent: 300 100% 70%;
+    --accent-foreground: 270 30% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 270 30% 20%;
     --input: 270 30% 20%;
-    --ring: 270 70% 65%;
+    --ring: 300 100% 70%;
     --purple-accent: 280 90% 65%;
   }
 }

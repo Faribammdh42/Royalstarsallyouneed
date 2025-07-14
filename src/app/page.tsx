@@ -6,22 +6,14 @@ import { Logo } from '@/components/logo';
 export default function WelcomePage() {
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center bg-background p-4">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] dark:bg-zinc-950 dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)]">
-        <div className="absolute right-0 top-0 h-full w-full bg-[radial-gradient(circle_800px_at_100%_200px,hsl(var(--primary)/0.2),transparent)]"></div>
+      <div className="absolute inset-0 -z-10 h-full w-full bg-background bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:6rem_4rem]">
+        <div className="absolute right-0 top-0 h-full w-full bg-[radial-gradient(circle_800px_at_100%_200px,hsl(var(--primary)/0.15),transparent)]"></div>
       </div>
-      <Card className="w-full max-w-md shadow-2xl backdrop-blur-lg bg-card/80 border-0">
-        <CardHeader className="text-center">
-          <div className="mx-auto mb-4">
-            <Logo />
-          </div>
-          <CardTitle className="font-headline text-5xl font-bold tracking-tight">
-            RoyalStar
-          </CardTitle>
-          <CardDescription className="text-muted-foreground">
-            all you need from music
-          </CardDescription>
+      <Card className="w-full max-w-md shadow-2xl bg-transparent border-0 text-center">
+        <CardHeader>
+          <Logo />
         </CardHeader>
-        <CardContent className="flex flex-col gap-4">
+        <CardContent className="flex flex-col gap-4 mt-8">
           <Button asChild size="lg" className="w-full">
             <Link href="/home">
               <svg className="mr-2 h-5 w-5" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
