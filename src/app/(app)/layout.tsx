@@ -27,11 +27,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <AppProvider>
       <div className="min-h-screen bg-background text-foreground">
         <div className="flex">
-          {/* Desktop Sidebar - Replaced with bottom nav for unified experience */}
-          {/* <aside className="hidden md:block fixed top-0 left-0 h-full w-72 border-r bg-background/50 z-20">
-            <MainNav />
-          </aside> */}
-
           {/* Main Content */}
           <main className="flex-1 pb-40">
             {children}
