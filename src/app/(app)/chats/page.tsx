@@ -33,7 +33,7 @@ export default function ChatsPage() {
                 <Avatar className="size-12 relative">
                   <AvatarImage src={room.imageUrl} data-ai-hint={room.dataAiHint} />
                   <AvatarFallback>{room.name.charAt(0)}</AvatarFallback>
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-card"></div>
                 </Avatar>
                 <div className="flex-1">
                   <h3 className="font-bold">{room.name}</h3>

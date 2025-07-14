@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -6,111 +5,120 @@ import { PageHeader } from '@/components/page-header';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrackCard } from '@/components/track-card';
-import { Upload, Crown, Award, Users, Waves } from 'lucide-react';
+import { Upload, Crown, Award, Users, Waves, Heart, Music, MessageSquare, UserPlus, Settings, Star } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 
-const userUploads = [
-  { title: 'My First Beat', artist: 'User', imageUrl: 'https://placehold.co/300x300.png', dataAiHint: 'music production' },
-  { title: 'Vocal Idea', artist: 'User', imageUrl: 'https://placehold.co/300x300.png', dataAiHint: 'vocal waveform' },
-];
+const user = {
+    name: 'Royal User',
+    handle: '@royaluser',
+    avatarUrl: 'https://placehold.co/128x128.png',
+    dataAiHint: 'portrait user',
+    stats: {
+        followers: 421,
+        following: 287,
+        rank: 208,
+        gifts: 949,
+    },
+    family: {
+        name: 'ROYAL STAR',
+        rank: 83,
+        imageUrl: 'https://placehold.co/40x40.png',
+        dataAiHint: 'royal crest'
+    }
+};
+
+const quickActions = [
+    { label: 'Likes', icon: Heart, href:'#' },
+    { label: 'My Songs', icon: Music, href:'#' },
+    { label: 'Comments', icon: MessageSquare, href:'#' },
+    { label: 'Following', icon: UserPlus, href:'#' },
+]
 
 export default function ProfilePage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <PageHeader title="My Profile" />
+        {/* Profile Header */}
+        <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold">Me</h1>
+            <Button variant="ghost" size="icon">
+                <Settings />
+            </Button>
+        </div>
 
-      <Card className="mb-8 overflow-hidden shadow-lg">
-        <div className="bg-primary/10 h-24 md:h-32" />
-        <CardContent className="p-6 pt-0 flex flex-col items-center gap-6 -mt-16 md:-mt-20">
-          <Avatar className="size-24 md:size-32 border-4 border-background shadow-md">
-            <AvatarImage src="https://placehold.co/128x128.png" data-ai-hint="portrait user" />
-            <AvatarFallback>RS</AvatarFallback>
-          </Avatar>
-          <div className="flex-grow text-center">
-            <h2 className="text-3xl font-bold font-headline flex items-center justify-center gap-2">
-                <Crown className="size-7 text-accent" />
-                Royal User
-            </h2>
-            <p className="text-muted-foreground">user@email.com</p>
-            
-            <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
-               <Badge variant="outline" className="flex items-center gap-1">
-                 Pro Member
-               </Badge>
-               <Badge variant="outline" className="flex items-center gap-1">
-                 <Waves className="size-3 text-primary"/>
-                 Aquarius
-               </Badge>
-               <Badge variant="outline" className="flex items-center gap-1">
-                 <Users className="size-3 text-primary"/>
-                 Friendship Lvl. 5
-               </Badge>
+        {/* User Card */}
+        <Card className="bg-card border-0 shadow-none mb-6">
+            <CardContent className="flex items-center gap-4 p-0">
+                <Avatar className="size-20">
+                    <AvatarImage src={user.avatarUrl} data-ai-hint={user.dataAiHint} />
+                    <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                    <h2 className="text-xl font-bold">{user.name}</h2>
+                    <p className="text-sm text-muted-foreground">{user.handle}</p>
+                </div>
+                <Button variant="outline" size="sm" className="rounded-full">Edit Profile</Button>
+            </CardContent>
+        </Card>
+
+        {/* User Stats */}
+        <Card className="mb-6">
+             <div className="grid grid-cols-4 gap-2 text-center p-4">
+                <div>
+                    <p className="text-lg font-bold">{user.stats.followers}</p>
+                    <p className="text-xs text-muted-foreground">Followers</p>
+                </div>
+                <div>
+                    <p className="text-lg font-bold">{user.stats.following}</p>
+                    <p className="text-xs text-muted-foreground">Following</p>
+                </div>
+                <div>
+                    <p className="text-lg font-bold">{user.stats.rank}</p>
+                    <p className="text-xs text-muted-foreground">Rank</p>
+                </div>
+                <div>
+                    <p className="text-lg font-bold">{user.stats.gifts}</p>
+                    <p className="text-xs text-muted-foreground">Gifts</p>
+                </div>
             </div>
-          </div>
-        </CardContent>
-        <Separator />
-        <div className="p-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div>
-                <p className="text-2xl font-bold">421</p>
-                <p className="text-sm text-muted-foreground">Followers</p>
-            </div>
-            <div>
-                <p className="text-2xl font-bold">287</p>
-                <p className="text-sm text-muted-foreground">Following</p>
-            </div>
-            <div>
-                <p className="text-2xl font-bold">208</p>
-                <p className="text-sm text-muted-foreground">Rank</p>
-            </div>
-            <div>
-                <p className="text-2xl font-bold">949</p>
-                <p className="text-sm text-muted-foreground">Gifts</p>
-            </div>
-        </div>
-      </Card>
-      
-      <div className="grid md:grid-cols-3 gap-8">
-        <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold font-headline mb-4">My Uploads</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {userUploads.map(track => (
-                    <TrackCard key={track.title} {...track} />
-                ))}
-                {userUploads.length === 0 && (
-                    <div className="text-center py-12 text-muted-foreground col-span-full">
-                        <p>You haven't uploaded any tracks yet.</p>
-                        <Button asChild className="mt-4">
-                            <Link href="/upload"><Upload className="mr-2 size-4" /> Upload Music</Link>
-                        </Button>
+        </Card>
+
+        {/* Quick Actions Grid */}
+        <div className="grid grid-cols-4 gap-4 text-center mb-6">
+            {quickActions.map(action => (
+                <Link href={action.href} key={action.label} className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+                    <div className="p-3 bg-muted rounded-full">
+                        <action.icon className="size-6" />
                     </div>
-                )}
-            </div>
+                    <span className="text-xs">{action.label}</span>
+                </Link>
+            ))}
         </div>
-        
-        <div className="space-y-6">
-            <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-xl"><Crown className="text-primary"/> Family</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <p className="text-lg font-semibold">ROYAL STAR</p>
-                    <p className="text-sm text-muted-foreground">Family Ranking: No.83</p>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-xl"><Award className="text-primary"/> Badges</CardTitle>
-                </CardHeader>
-                <CardContent className="flex flex-wrap gap-2">
-                   <Badge variant="default" className="text-base p-2">Rank 100</Badge>
-                   <Badge variant="secondary" className="text-base p-2">Rank 20</Badge>
-                   <Badge variant="outline" className="text-base p-2">Rank 10</Badge>
-                </CardContent>
-            </Card>
+
+        {/* Family Card */}
+        <Card className="mb-6">
+            <CardContent className="p-3">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <Avatar className="size-10 border-2 border-yellow-400">
+                            <AvatarImage src={user.family.imageUrl} data-ai-hint={user.family.dataAiHint}/>
+                        </Avatar>
+                        <div>
+                            <h3 className="font-bold flex items-center gap-1">
+                                {user.family.name}
+                            </h3>
+                            <p className="text-xs text-muted-foreground">Family Rankings: No.{user.family.rank}</p>
+                        </div>
+                    </div>
+                     <Button variant="secondary" size="sm" className="rounded-full">View</Button>
+                </div>
+            </CardContent>
+        </Card>
+
+        {/* Tabbed Section */}
+        <div className="text-center text-muted-foreground py-8">
+            <p>More content sections (e.g., Posts, Creations) can go here.</p>
         </div>
-      </div>
     </div>
   );
 }

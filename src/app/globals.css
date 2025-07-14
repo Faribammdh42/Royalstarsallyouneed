@@ -4,53 +4,53 @@
 
 @layer base {
   :root {
-    --background: 270 50% 98%;
-    --foreground: 270 50% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 270 50% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 270 50% 10%;
-    --primary: 330 100% 71%;
-    --primary-foreground: 330 100% 5%;
-    --secondary: 270 50% 95%;
-    --secondary-foreground: 270 50% 20%;
-    --muted: 270 50% 96%;
+    --background: 270 60% 99%;
+    --foreground: 270 20% 15%;
+    --card: 270 60% 100%;
+    --card-foreground: 270 20% 15%;
+    --popover: 270 60% 100%;
+    --popover-foreground: 270 20% 15%;
+    --primary: 270 80% 60%;
+    --primary-foreground: 270 80% 98%;
+    --secondary: 270 60% 95%;
+    --secondary-foreground: 270 20% 25%;
+    --muted: 270 60% 96%;
     --muted-foreground: 270 20% 45%;
-    --accent: 51 100% 50%;
-    --accent-foreground: 51 100% 10%;
+    --accent: 340 100% 65%;
+    --accent-foreground: 340 100% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 270 50% 90%;
-    --input: 270 50% 92%;
-    --ring: 330 100% 71%;
+    --border: 270 60% 90%;
+    --input: 270 60% 92%;
+    --ring: 270 80% 60%;
     --radius: 0.8rem;
-    --purple-accent: 300 100% 25.1%;
+    --purple-accent: 280 100% 60%;
   }
- 
+
   .dark {
-    --background: 270 40% 5%;
-    --foreground: 270 40% 95%;
-    --card: 270 40% 8%;
-    --card-foreground: 270 40% 95%;
-    --popover: 270 40% 5%;
-    --popover-foreground: 270 40% 95%;
-    --primary: 330 90% 65%;
-    --primary-foreground: 330 90% 5%;
-    --secondary: 270 40% 15%;
-    --secondary-foreground: 270 40% 95%;
-    --muted: 270 40% 15%;
-    --muted-foreground: 270 30% 65%;
-    --accent: 51 100% 50%;
-    --accent-foreground: 51 100% 10%;
+    --background: 270 30% 6%;
+    --foreground: 270 30% 96%;
+    --card: 270 30% 10%;
+    --card-foreground: 270 30% 96%;
+    --popover: 270 30% 6%;
+    --popover-foreground: 270 30% 96%;
+    --primary: 270 70% 65%;
+    --primary-foreground: 270 70% 98%;
+    --secondary: 270 30% 15%;
+    --secondary-foreground: 270 30% 96%;
+    --muted: 270 30% 12%;
+    --muted-foreground: 270 20% 65%;
+    --accent: 340 100% 70%;
+    --accent-foreground: 340 100% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 270 40% 18%;
-    --input: 270 40% 18%;
-    --ring: 330 90% 65%;
-    --purple-accent: 300 100% 75%;
+    --border: 270 30% 20%;
+    --input: 270 30% 20%;
+    --ring: 270 70% 65%;
+    --purple-accent: 280 90% 65%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
@@ -62,8 +62,8 @@
 
 @layer utilities {
   .holo-button {
-    @apply relative overflow-hidden bg-primary text-primary-foreground transition-transform duration-300 ease-in-out hover:scale-105;
-    background-image: conic-gradient(from var(--gradient-angle, 0deg), hsl(var(--primary)), hsl(var(--purple-accent)), hsl(var(--primary)));
+    @apply relative overflow-hidden bg-accent text-accent-foreground transition-transform duration-300 ease-in-out hover:scale-105;
+    background-image: conic-gradient(from var(--gradient-angle, 0deg), hsl(var(--accent)), hsl(var(--primary)), hsl(var(--accent)));
     animation: holo-rotation 4s linear infinite;
   }
 
@@ -73,12 +73,12 @@
   }
 
   .neon-icon {
-    @apply text-primary drop-shadow-[0_0_3px_hsl(var(--primary))] transition-all duration-300;
+    @apply text-accent drop-shadow-[0_0_3px_hsl(var(--accent))] transition-all duration-300;
   }
   .neon-icon-active {
-    @apply text-primary drop-shadow-[0_0_8px_hsl(var(--primary))];
+    @apply text-accent drop-shadow-[0_0_8px_hsl(var(--accent))];
   }
   .neon-icon-purple {
-    @apply text-accent drop-shadow-[0_0_5px_hsl(var(--accent))];
+    @apply text-primary drop-shadow-[0_0_5px_hsl(var(--primary))];
   }
 }
