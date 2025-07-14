@@ -1,13 +1,52 @@
+
 'use client';
 
+import * as React from 'react';
 import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
-import { Play, Pause, SkipBack, Mic, Volume2 } from 'lucide-react';
+import { Mic, Video, Square, Play, Pause, Volume2, Sparkles, Camera, Music, SkipBack } from 'lucide-react';
 import Image from 'next/image';
 
 export default function SingPage() {
+    const [isRecording, setIsRecording] = React.useState(false);
+    const [recordingTime, setRecordingTime] = React.useState(0);
+    const [selectedEffect, setSelectedEffect] = React.useState('none');
+    const [volume, setVolume] = React.useState([80]);
+  
+    const audioEffects = [
+      { id: 'none', name: 'No Effect', icon: '🎤' },
+      { id: 'reverb', name: 'Reverb', icon: '🌊' },
+      { id: 'autotune', name: 'Autotune', icon: '🤖' },
+      { id: 'chorus', name: 'Chorus', icon: '🎵' },
+      { id: 'bass', name: 'Bass', icon: '🔊' }
+    ];
+  
+    const videoFilters = [
+      { id: 'normal', name: 'Normal', color: 'bg-gray-100' },
+      { id: 'vintage', name: 'Vintage', color: 'bg-amber-100' },
+      { id: 'cool', name: 'Cool', color: 'bg-blue-100' },
+      { id: 'warm', name: 'Warm', color: 'bg-orange-100' },
+      { id: 'dramatic', name: 'Dramatic', color: 'bg-purple-100' }
+    ];
+  
+    React.useEffect(() => {
+      let interval: NodeJS.Timeout;
+      if (isRecording) {
+        interval = setInterval(() => {
+          setRecordingTime(prev => prev + 1);
+        }, 1000);
+      }
+      return () => clearInterval(interval);
+    }, [isRecording]);
+  
+    const formatTime = (seconds: number) => {
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <PageHeader
