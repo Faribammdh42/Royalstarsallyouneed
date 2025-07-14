@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -15,7 +16,7 @@ const MomentIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 
-const CreateIcon = (props: React.SVGProps<SVGSVGElement>) => (
+const SingIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
     <path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
     <path d="M19 10v1a7 7 0 0 1-14 0v-1h2v1a5 5 0 0 0 10 0v-1z"/>
@@ -36,7 +37,7 @@ const MeIcon = (props: React.SVGProps<SVGSVGElement>) => (
 const navItems = [
   { href: '/home', label: 'Room', icon: Home },
   { href: '/moment', label: 'Moment', icon: MomentIcon },
-  { href: '/record', label: 'Create', icon: CreateIcon, isCentral: true },
+  { href: '/sing', label: 'Sing', icon: SingIcon, isCentral: true },
   { href: '/chats', label: 'Chat', icon: MessageSquareText, notification: 99 },
   { href: '/profile', label: 'Me', icon: MeIcon },
 ];
@@ -65,7 +66,7 @@ export function MobileNav() {
             href={item.href}
             className={cn(
               "relative flex flex-col items-center gap-1 text-muted-foreground transition-colors w-full h-full justify-center",
-              isActive && 'text-accent'
+              isActive ? 'text-accent' : 'text-gray-400'
             )}
           >
             <item.icon className={cn("size-6", isActive && 'neon-icon-active')} />
