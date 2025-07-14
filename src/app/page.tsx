@@ -9,16 +9,16 @@ export default function WelcomePage() {
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] dark:bg-zinc-950 dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)]">
         <div className="absolute right-0 top-0 h-full w-full bg-[radial-gradient(circle_800px_at_100%_200px,hsl(var(--primary)/0.2),transparent)]"></div>
       </div>
-      <Card className="w-full max-w-md shadow-2xl backdrop-blur-lg">
+      <Card className="w-full max-w-md shadow-2xl backdrop-blur-lg bg-card/80 border-0">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <Logo />
           </div>
-          <CardTitle className="font-headline text-4xl font-bold tracking-tighter">
-            Welcome to RoyalStars
+          <CardTitle className="font-headline text-5xl font-bold tracking-tight">
+            RoyalStar
           </CardTitle>
           <CardDescription className="text-muted-foreground">
-            Your universe of music awaits.
+            all you need from music
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
@@ -36,7 +36,8 @@ export default function WelcomePage() {
         </CardContent>
       </Card>
       <footer className="absolute bottom-4 text-center text-xs text-muted-foreground">
-        <p>&copy; {new Date().getFullYear()} RoyalStars. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} RoyalStar. All rights reserved.</p>
+        <p>By Allyouneed Company</p>
       </footer>
     </main>
   );
