@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("dark", urbanist.variable)}>
+    <html lang="en" className={cn(urbanist.variable)}>
       <head />
       <body className="font-body antialiased">
         {children}
