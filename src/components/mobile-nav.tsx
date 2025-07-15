@@ -4,16 +4,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Home, Compass, MessageSquareText, User, Music } from 'lucide-react';
+import { Home, Clapperboard, MessageSquareText, User } from 'lucide-react';
 import { Badge } from './ui/badge';
-
-// Custom SVG for Moment Icon
-const MomentIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-    <circle cx="12" cy="12" r="1.5" fill="currentColor"></circle>
-</svg>
-);
 
 
 const SingIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -25,21 +17,12 @@ const SingIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 
-const MeIcon = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
-        <circle cx="12" cy="8" r="4" fillOpacity="0.5"/>
-        <path d="M12 13c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z" fillOpacity="0.5"/>
-        <path d="M15.5 13.92c.63-.09 1.25-.21 1.84-.37-.8-.6-1.74-1.05-2.77-1.29a7.97 7.97 0 0 1-2.07-.02c-1.12.23-2.1.75-2.89 1.4.61.16 1.25.3 1.91.43A5.99 5.99 0 0 1 12 13c1.23 0 2.38-.37 3.29-.98.07.33.15.66.21.98z" />
-    </svg>
-);
-
-
 const navItems = [
   { href: '/home', label: 'Room', icon: Home },
-  { href: '/moment', label: 'Moment', icon: MomentIcon },
+  { href: '/moment', label: 'Moment', icon: Clapperboard },
   { href: '/sing', label: 'Sing', icon: SingIcon, isCentral: true },
   { href: '/chats', label: 'Chat', icon: MessageSquareText, notification: 99 },
-  { href: '/profile', label: 'Me', icon: MeIcon },
+  { href: '/profile', label: 'Me', icon: User },
 ];
 
 export function MobileNav() {

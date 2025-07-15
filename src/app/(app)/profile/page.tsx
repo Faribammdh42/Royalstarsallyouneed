@@ -2,43 +2,38 @@
 'use client';
 
 import * as React from 'react';
-import { PageHeader } from '@/components/page-header';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { UserPlus, Settings, MessageSquare, Music } from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { UserPlus, Settings, MessageSquare, Music, Wallet, Star, ShieldCheck, Gamepad2, Gift } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
 
 const user = {
-    name: 'Fariba M.',
+    name: 'Fariba.mmdh',
     handle: '@fariba123',
     avatarUrl: 'https://i.pravatar.cc/150?img=47',
     dataAiHint: 'woman portrait',
     bio: 'Singer & composer passionate about music and life. Follow for daily tunes!',
     stats: {
-        followers: 1200,
-        following: 180,
+        followers: 421,
+        following: 287,
         creations: 35,
+        gifts: 949,
+        rank: 208,
     },
-    isCurrentUser: false,
+    tags: ['Iran', 'Aquarius', 'Friendship'],
+    isCurrentUser: true,
     isFollowing: false,
 };
 
-const creations = [
-  { id: 1, title: 'Desert Rose Cover', imageUrl: 'https://placehold.co/100x100.png', dataAiHint: 'desert landscape' },
-  { id: 2, title: 'Ocean Eyes (AI Mix)', imageUrl: 'https://placehold.co/100x100.png', dataAiHint: 'ocean wave' },
-  { id: 3, title: 'City Lights Ballad', imageUrl: 'https://placehold.co/100x100.png', dataAiHint: 'city skyline' },
-];
-
-const followers = [
-    { name: 'Alice', avatarUrl: 'https://i.pravatar.cc/150?img=1', dataAiHint: 'woman smiling' },
-    { name: 'Bob', avatarUrl: 'https://i.pravatar.cc/150?img=2', dataAiHint: 'man glasses' },
-    { name: 'Charlie', avatarUrl: 'https://i.pravatar.cc/150?img=3', dataAiHint: 'man beanie' },
-];
-
-const following = [
-    { name: 'David', avatarUrl: 'https://i.pravatar.cc/150?img=4', dataAiHint: 'man portrait' },
-    { name: 'Eva', avatarUrl: 'https://i.pravatar.cc/150?img=5', dataAiHint: 'woman singing' },
+const profileActions = [
+    { label: 'Daily Tasks', icon: Star, href: '#' },
+    { label: 'VIP & Noble', icon: ShieldCheck, href: '#' },
+    { label: 'My Songs & Drafts', icon: Music, href: '/sing' },
+    { label: 'Game Zone', icon: Gamepad2, href: '#' },
+    { label: 'Recharge & Wallet', icon: Wallet, href: '/gifts' },
+    { label: 'Settings', icon: Settings, href: '#' },
 ];
 
 export default function ProfilePage() {
@@ -50,35 +45,29 @@ export default function ProfilePage() {
     <div className="container mx-auto px-4 py-8">
         
         {/* Profile Header */}
-        <div className="flex flex-col sm:flex-row gap-6 mb-6">
-            <Avatar className="size-24 sm:size-32 border-4 border-primary/50 shadow-lg">
+        <div className="flex flex-col items-center text-center gap-4 mb-6">
+            <Avatar className="size-24 border-4 border-primary/50 shadow-lg">
                 <AvatarImage src={user.avatarUrl} data-ai-hint={user.dataAiHint} />
                 <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
             </Avatar>
-            <div className="flex-1">
-                <div className="flex items-center justify-between mb-2">
-                    <h1 className="text-3xl font-bold">{user.name}</h1>
-                    <Button variant="ghost" size="icon">
-                        <Settings />
+            <div>
+                <h1 className="text-3xl font-bold">{user.name}</h1>
+                <p className="text-muted-foreground">{user.handle}</p>
+            </div>
+             {user.isCurrentUser ? (
+                <Button variant="outline">Edit Profile</Button>
+            ) : (
+                <div className="flex gap-2">
+                     <Button onClick={toggleFollow}>
+                        <UserPlus className="mr-2" />
+                        {isFollowing ? 'Following' : 'Follow'}
+                    </Button>
+                    <Button variant="secondary">
+                        <MessageSquare className="mr-2" />
+                        Message
                     </Button>
                 </div>
-                <p className="text-muted-foreground mb-4">{user.handle}</p>
-                
-                {user.isCurrentUser ? (
-                    <Button variant="outline">Edit Profile</Button>
-                ) : (
-                    <div className="flex gap-2">
-                         <Button onClick={toggleFollow}>
-                            <UserPlus className="mr-2" />
-                            {isFollowing ? 'Following' : 'Follow'}
-                        </Button>
-                        <Button variant="secondary">
-                            <MessageSquare className="mr-2" />
-                            Message
-                        </Button>
-                    </div>
-                )}
-            </div>
+            )}
         </div>
 
         {/* User Stats */}
@@ -98,66 +87,26 @@ export default function ProfilePage() {
                 </div>
             </div>
         </Card>
-
-        {/* Bio */}
-        <div className="mb-6">
-            <h3 className="font-bold mb-1">Bio</h3>
-            <p className="text-muted-foreground">{user.bio}</p>
+        
+        {/* Tags */}
+        <div className="flex justify-center gap-2 mb-6">
+            {user.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
         </div>
 
-        {/* Tabbed Section */}
-        <Tabs defaultValue="creations" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="creations">Creations</TabsTrigger>
-                <TabsTrigger value="followers">Followers</TabsTrigger>
-                <TabsTrigger value="following">Following</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="creations" className="mt-4 space-y-4">
-                {creations.map(creation => (
-                    <Card key={creation.id} className="hover:bg-muted/50">
-                        <CardContent className="p-3 flex items-center gap-4">
-                            <Avatar className="size-12 rounded-md">
-                                <AvatarImage src={creation.imageUrl} data-ai-hint={creation.dataAiHint} />
-                                <AvatarFallback><Music/></AvatarFallback>
-                            </Avatar>
-                            <p className="font-semibold flex-1">{creation.title}</p>
-                            <Button variant="ghost" size="icon"><Music /></Button>
-                        </CardContent>
-                    </Card>
-                ))}
-            </TabsContent>
 
-            <TabsContent value="followers" className="mt-4 space-y-3">
-                {followers.map(f => (
-                     <Card key={f.name} className="hover:bg-muted/50">
+        {/* Action List */}
+        <div className="space-y-2">
+            {profileActions.map(action => (
+                 <Card key={action.label} className="hover:bg-muted/50 transition-colors">
+                    <Link href={action.href}>
                         <CardContent className="p-3 flex items-center gap-4">
-                            <Avatar>
-                                <AvatarImage src={f.avatarUrl} data-ai-hint={f.dataAiHint} />
-                                <AvatarFallback>{f.name.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <p className="font-semibold flex-1">{f.name}</p>
-                            <Button variant="outline" size="sm">Follow</Button>
+                            <action.icon className="size-5 text-muted-foreground" />
+                            <p className="font-semibold flex-1">{action.label}</p>
                         </CardContent>
-                    </Card>
-                ))}
-            </TabsContent>
-
-            <TabsContent value="following" className="mt-4 space-y-3">
-                {following.map(f => (
-                     <Card key={f.name} className="hover:bg-muted/50">
-                        <CardContent className="p-3 flex items-center gap-4">
-                            <Avatar>
-                                <AvatarImage src={f.avatarUrl} data-ai-hint={f.dataAiHint} />
-                                <AvatarFallback>{f.name.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <p className="font-semibold flex-1">{f.name}</p>
-                            <Button variant="secondary" size="sm">Following</Button>
-                        </CardContent>
-                    </Card>
-                ))}
-            </TabsContent>
-        </Tabs>
+                    </Link>
+                </Card>
+            ))}
+        </div>
     </div>
   );
 }
