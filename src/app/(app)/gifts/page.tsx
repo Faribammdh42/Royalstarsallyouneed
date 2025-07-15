@@ -1,4 +1,3 @@
-
 'use client';
 
 import * as React from 'react';
@@ -7,10 +6,85 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Coins, Gift, Crown, Star, Heart, Trophy, Rocket, Gem } from 'lucide-react';
+import { Coins, Gift, Crown, Star, Heart, Trophy, Rocket, Gem, Ticket } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+// @ts-ignore
+import { doc, getDoc, updateDoc, increment, arrayUnion } from 'firebase/firestore';
+import { auth, db } from '@/lib/firebase';
 
 export default function GiftsPage() {
   const [coins, setCoins] = React.useState(1250);
+  const [code, setCode] = React.useState('');
+  const [resultMessage, setResultMessage] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const redeemCode = async () => {
+    const user = auth.currentUser;
+    if (!user) {
+      setResultMessage('❌ You must be logged in to redeem a code.');
+      return;
+    }
+
+    if (!code.trim()) {
+      setResultMessage('⚠️ Please enter a code.');
+      return;
+    }
+
+    setIsLoading(true);
+    setResultMessage('');
+
+    const codeId = code.trim().toUpperCase();
+    const giftCodeRef = doc(db, 'giftcodes', codeId);
+
+    try {
+      const giftCodeSnap = await getDoc(giftCodeRef);
+
+      if (!giftCodeSnap.exists()) {
+        setResultMessage('❌ Invalid code!');
+        setIsLoading(false);
+        return;
+      }
+
+      const giftCodeData = giftCodeSnap.data();
+      const usedBy = (giftCodeData.usedBy || []) as string[];
+
+      if (usedBy.includes(user.uid)) {
+        setResultMessage('⚠️ You have already used this code.');
+        setIsLoading(false);
+        return;
+      }
+
+      const userRef = doc(db, 'users', user.uid);
+      const value = giftCodeData.value || 0;
+      const type = giftCodeData.type || 'credit';
+
+      if (type === 'credit') {
+        await updateDoc(userRef, {
+          balance: increment(value)
+        });
+      } else if (type === 'vip') {
+        await updateDoc(userRef, {
+          vip: true
+        });
+      }
+
+      await updateDoc(giftCodeRef, {
+        usedBy: arrayUnion(user.uid)
+      });
+
+      setResultMessage(`✅ Code applied! You received ${value} ${type}.`);
+      // Optionally, refresh user's coin balance if it's stored in state
+      if (type === 'credit') {
+        setCoins(prev => prev + value);
+      }
+
+    } catch (error) {
+      console.error("Error redeeming code:", error);
+      setResultMessage('🔥 An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const giftCategories = {
     basic: [
@@ -65,10 +139,11 @@ export default function GiftsPage() {
       </PageHeader>
 
       <Tabs defaultValue="gifts" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="gifts"><Gift className="mr-2" />Gifts</TabsTrigger>
           <TabsTrigger value="coins"><Coins className="mr-2" />Buy Coins</TabsTrigger>
           <TabsTrigger value="leaderboard"><Trophy className="mr-2" />Leaderboard</TabsTrigger>
+          <TabsTrigger value="redeem"><Ticket className="mr-2" />Redeem Code</TabsTrigger>
         </TabsList>
 
         <TabsContent value="gifts" className="mt-6 space-y-8">
@@ -91,8 +166,8 @@ export default function GiftsPage() {
                         <Coins className="w-4 h-4 text-yellow-500" />
                         <span className="font-bold text-base">{gift.price}</span>
                       </div>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         className="w-full mt-auto"
                         disabled={coins < gift.price}
                         onClick={() => handleBuyGift(gift.price)}
@@ -155,8 +230,8 @@ export default function GiftsPage() {
                     }`}>
                       {user.rank}
                     </div>
-                    <img 
-                      src={user.avatar} 
+                    <img
+                      src={user.avatar}
                       alt={user.name}
                       className="w-12 h-12 rounded-full border-2 border-primary/50"
                       data-ai-hint={user.dataAiHint}
@@ -176,6 +251,38 @@ export default function GiftsPage() {
                   </div>
                 ))}
               </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="redeem" className="mt-6">
+          <Card className="max-w-md mx-auto">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-2xl">
+                <Ticket className="w-7 h-7 text-green-500" />
+                Redeem a Gift Code
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                Enter your gift code below to claim your reward.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Input
+                  placeholder="Enter your code"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  className="flex-grow"
+                />
+                <Button onClick={redeemCode} disabled={isLoading} className="sm:w-auto">
+                  {isLoading ? 'Redeeming...' : 'Redeem'}
+                </Button>
+              </div>
+              {resultMessage && (
+                <p className="text-center font-semibold text-lg mt-4">
+                  {resultMessage}
+                </p>
+              )}
             </CardContent>
           </Card>
         </TabsContent>

@@ -1,6 +1,10 @@
+// @ts-ignore
 import { initializeApp } from 'firebase/app';
+// @ts-ignore
 import { getFirestore } from 'firebase/firestore';
+// @ts-ignore
 import { getAuth } from 'firebase/auth';
+// @ts-ignore
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
@@ -12,7 +16,11 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
-const app = initializeApp(firebaseConfig);
+// @ts-ignore
+export const app = initializeApp(firebaseConfig);
+// @ts-ignore
 export const db = getFirestore(app);
+// @ts-ignore
 export const auth = getAuth(app);
+// @ts-ignore
 export const storage = getStorage(app);
