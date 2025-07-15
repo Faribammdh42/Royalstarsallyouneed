@@ -41,8 +41,8 @@ const stats = [
 
 export default function RoomPage() {
   return (
-    <div className="w-full min-h-screen bg-gradient-to-b from-purple-800 via-purple-900 to-black text-white">
-      <div className="container mx-auto px-4 py-8">
+    <div className="w-full min-h-screen bg-gradient-to-b from-purple-800 via-purple-900 to-black text-white flex justify-center">
+      <div className="container max-w-md mx-auto px-4 py-8">
         
         {/* Sing Together Card */}
         <Card className="mb-4 bg-primary/80 backdrop-blur-sm border-0 rounded-2xl">
@@ -85,16 +85,8 @@ export default function RoomPage() {
 
         {/* RoyalStar Branding & Gifts */}
         <div className="text-center my-8 relative">
-            <h1 className="text-6xl font-extrabold tracking-tighter text-white/50 opacity-50">RoyalStar</h1>
-            <p className="text-sm text-white/70 -mt-2">all you need from music</p>
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center items-end gap-4">
-                {giftIcons.map((gift, i) => (
-                    <div key={i} className="relative">
-                        <img src={gift.imageUrl} alt="Gift" className="size-16" data-ai-hint={gift.dataAiHint} />
-                        {gift.count && <div className="absolute -bottom-1 -right-1 text-xs bg-green-500 text-white rounded-full px-1.5 py-0.5">{gift.count}</div>}
-                    </div>
-                ))}
-            </div>
+            <h1 className="text-4xl font-extrabold tracking-tighter text-white/50 opacity-50">RoyalStar</h1>
+            <p className="text-xs text-white/70">all you need from music</p>
         </div>
 
         {/* User Tags and Friendship */}

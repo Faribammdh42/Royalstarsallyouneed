@@ -6,6 +6,7 @@
 	],
 	"settings": {
 		"IDX.aI.enableInlineCompletion": true,
-		"IDX.aI.enableCodebaseIndexing": true
+		"IDX.aI.enableCodebaseIndexing": true,
+		"java.configuration.updateBuildConfiguration": "interactive"
 	}
 }

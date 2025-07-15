@@ -1,0 +1,133 @@
+type User @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  username: String!
+  email: String!
+  phone: String
+  profileImage: String
+  bio: String
+  level: Int @default(value: 1)
+  points: Int @default(value: 0)
+  role: UserRole @default(value: USER)
+  songs: [Song] @hasMany(indexName: "byUser", fields: ["id"])
+  likes: [Like] @hasMany(indexName: "byUser", fields: ["id"])
+  notifications: [Notification] @hasMany(indexName: "byUser", fields: ["id"])
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Song @model @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID!
+  title: String!
+  artist: String!
+  audioUrl: String!
+  coverImage: String
+  duration: Int
+  pitchScore: Float
+  timingScore: Float
+  aiEnhancement: Boolean @default(value: false)
+  effects: String
+  lyrics: String
+  userId: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userId"])
+  likes: [Like] @hasMany(indexName: "bySong", fields: ["id"])
+  recordings: Int @default(value: 0)
+  isPublic: Boolean @default(value: true)
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Like @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  userId: ID! @index(name: "byUser")
+  songId: ID! @index(name: "bySong")
+  user: User @belongsTo(fields: ["userId"])
+  song: Song @belongsTo(fields: ["songId"])
+  createdAt: AWSDateTime!
+}
+
+type Lyrics @model @auth(rules: [{ allow: public, operations: [read] }]) {
+  id: ID!
+  songId: ID!
+  syncedLyrics: String!
+  language: String @default(value: "fa")
+  createdAt: AWSDateTime!
+}
+
+type Notification @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  userId: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userId"])
+  title: String!
+  message: String!
+  type: NotificationType!
+  isRead: Boolean @default(value: false)
+  createdAt: AWSDateTime!
+}
+
+enum UserRole {
+  USER
+  ARTIST
+  ADMIN
+}
+
+enum NotificationType {
+  LIKE
+  COMMENT
+  SYSTEM
+  ACHIEVEMENT
+}
+
+type Mutation {
+  uploadSong(input: UploadSongInput!): UploadSongResponse
+    @function(name: "processAudio-${env}")
+    @auth(rules: [{ allow: owner }])
+  
+  analyzeVoice(audioUrl: String!): VoiceAnalysisResponse
+    @function(name: "analyzeVoice-${env}")
+    @auth(rules: [{ allow: owner }])
+  
+  applyAIEffects(input: AIEffectsInput!): AIEffectsResponse
+    @function(name: "applyAIEffects-${env}")
+    @auth(rules: [{ allow: owner }])
+}
+
+input UploadSongInput {
+  title: String!
+  artist: String!
+  audioFile: String!
+  effects: String
+  aiEnhancement: Boolean
+  lyrics: String
+}
+
+input AIEffectsInput {
+  audioUrl: String!
+  effects: [String!]!
+  enhancement: Boolean
+}
+
+type UploadSongResponse {
+  songId: ID!
+  audioUrl: String!
+  status: String!
+  analysis: VoiceAnalysis
+}
+
+type VoiceAnalysisResponse {
+  pitchScore: Float!
+  timingScore: Float!
+  qualityScore: Float!
+  recommendations: [String!]!
+}
+
+type AIEffectsResponse {
+  processedAudioUrl: String!
+  effects: [String!]!
+  status: String!
+}
+
+type VoiceAnalysis {
+  pitchScore: Float!
+  timingScore: Float!
+  qualityScore: Float!
+}
