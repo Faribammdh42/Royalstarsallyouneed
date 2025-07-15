@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -6,28 +7,26 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Coins, Gift, Crown, Star, Heart, Trophy } from 'lucide-react';
+import { Coins, Gift, Crown, Star, Heart, Trophy, Rocket, Gem } from 'lucide-react';
 
 export default function GiftsPage() {
   const [coins, setCoins] = React.useState(1250);
 
   const giftCategories = {
     basic: [
-      { id: 1, name: 'Heart', icon: '❤️', price: 10, description: 'A token of affection' },
-      { id: 2, name: 'Rose', icon: '🌹', price: 25, description: 'For a beautiful performance' },
-      { id: 3, name: 'Applause', icon: '👏', price: 15, description: 'Well done!' },
-      { id: 4, name: 'Star', icon: '⭐', price: 30, description: 'A stellar performance' }
+      { id: 1, name: 'Heart', icon: <Heart className="text-pink-500" />, price: 10, description: 'A token of affection' },
+      { id: 3, name: 'Applause', icon: <span className="text-2xl">👏</span>, price: 15, description: 'Well done!' },
+      { id: 4, name: 'Star', icon: <Star className="text-yellow-400" />, price: 30, description: 'A stellar performance' }
     ],
     premium: [
-      { id: 5, name: 'Golden Crown', icon: '👑', price: 100, description: 'King of Singing' },
-      { id: 6, name: 'Golden Mic', icon: '🎤', price: 150, description: 'Golden Voice' },
-      { id: 7, name: 'Trophy', icon: '🏆', price: 200, description: 'Champion Performance' },
-      { id: 8, name: 'Fireworks', icon: '🎆', price: 300, description: 'An amazing performance' }
+      { id: 5, name: 'Crown', icon: <Crown className="text-yellow-500" />, price: 100, description: 'King of Singing' },
+      { id: 6, name: 'Gem', icon: <Gem className="text-purple-500" />, price: 150, description: 'A precious voice' },
+      { id: 7, name: 'Trophy', icon: <Trophy className="text-amber-600" />, price: 200, description: 'Champion Performance' }
     ],
     vip: [
-      { id: 9, name: 'Golden Dragon', icon: '🐉', price: 500, description: 'Legendary Power' },
-      { id: 10, name: 'Galaxy', icon: '🌌', price: 1000, description: 'A cosmic performance' },
-      { id: 11, name: 'Dream Castle', icon: '🏰', price: 1500, description: 'Sovereign of Music' }
+      { id: 9, name: 'Rocket', icon: <Rocket className="text-red-500" />, price: 500, description: 'To the moon!' },
+      { id: 10, name: 'Galaxy', icon: <span className="text-2xl">🌌</span>, price: 1000, description: 'A cosmic performance' },
+      { id: 11, name: 'Castle', icon: <span className="text-2xl">🏰</span>, price: 1500, description: 'Sovereign of Music' }
     ]
   };
 
@@ -40,12 +39,18 @@ export default function GiftsPage() {
   ];
 
   const leaderboard = [
-    { rank: 1, name: 'John Doe', gifts: 15420, avatar: 'https://placehold.co/40x40' },
-    { rank: 2, name: 'Jane Smith', gifts: 12350, avatar: 'https://placehold.co/40x40' },
-    { rank: 3, name: 'Peter Jones', gifts: 9870, avatar: 'https://placehold.co/40x40' },
-    { rank: 4, name: 'Mary Williams', gifts: 8450, avatar: 'https://placehold.co/40x40' },
-    { rank: 5, name: 'David Brown', gifts: 7230, avatar: 'https://placehold.co/40x40' }
+    { rank: 1, name: 'John Doe', gifts: 15420, avatar: 'https://placehold.co/40x40.png', dataAiHint: 'man smiling' },
+    { rank: 2, name: 'Jane Smith', gifts: 12350, avatar: 'https://placehold.co/40x40.png', dataAiHint: 'woman portrait' },
+    { rank: 3, name: 'Peter Jones', gifts: 9870, avatar: 'https://placehold.co/40x40.png', dataAiHint: 'man portrait' },
+    { rank: 4, name: 'Mary Williams', gifts: 8450, avatar: 'https://placehold.co/40x40.png', dataAiHint: 'woman glasses' },
+    { rank: 5, name: 'David Brown', gifts: 7230, avatar: 'https://placehold.co/40x40.png', dataAiHint: 'man beanie' }
   ];
+
+  const handleBuyGift = (price: number) => {
+    if (coins >= price) {
+        setCoins(prev => prev - price);
+    }
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -53,46 +58,46 @@ export default function GiftsPage() {
         title="Gift Shop"
         description="Send virtual gifts to encourage singers"
       >
-        <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full">
+        <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full shadow-lg">
           <Coins className="w-5 h-5" />
-          <span className="font-bold">{coins.toLocaleString()}</span>
+          <span className="font-bold text-lg">{coins.toLocaleString()}</span>
         </div>
       </PageHeader>
 
       <Tabs defaultValue="gifts" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="gifts">Gifts</TabsTrigger>
-          <TabsTrigger value="coins">Buy Coins</TabsTrigger>
-          <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
+          <TabsTrigger value="gifts"><Gift className="mr-2" />Gifts</TabsTrigger>
+          <TabsTrigger value="coins"><Coins className="mr-2" />Buy Coins</TabsTrigger>
+          <TabsTrigger value="leaderboard"><Trophy className="mr-2" />Leaderboard</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="gifts" className="space-y-6">
+        <TabsContent value="gifts" className="mt-6 space-y-8">
           {Object.entries(giftCategories).map(([category, gifts]) => (
             <div key={category}>
-              <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                {category === 'basic' && <Heart className="w-5 h-5 text-pink-500" />}
-                {category === 'premium' && <Crown className="w-5 h-5 text-yellow-500" />}
-                {category === 'vip' && <Star className="w-5 h-5 text-purple-500" />}
-                {category.charAt(0).toUpperCase() + category.slice(1)} Gifts
+              <h3 className="text-2xl font-bold mb-4 flex items-center gap-2 capitalize">
+                {category === 'basic' && <Heart className="w-6 h-6 text-pink-500" />}
+                {category === 'premium' && <Crown className="w-6 h-6 text-yellow-500" />}
+                {category === 'vip' && <Star className="w-6 h-6 text-purple-500" />}
+                {category} Gifts
               </h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {gifts.map((gift) => (
-                  <Card key={gift.id} className="hover:shadow-lg transition-shadow">
-                    <CardContent className="p-4 text-center">
-                      <div className="text-4xl mb-2">{gift.icon}</div>
-                      <h4 className="font-bold mb-1">{gift.name}</h4>
-                      <p className="text-sm text-muted-foreground mb-3">{gift.description}</p>
-                      <div className="flex items-center justify-center gap-1 mb-3">
+                  <Card key={gift.id} className="hover:shadow-xl transition-shadow duration-300 flex flex-col">
+                    <CardContent className="p-4 text-center flex flex-col flex-grow items-center">
+                      <div className="text-4xl mb-2 h-10 w-10 flex items-center justify-center">{gift.icon}</div>
+                      <h4 className="font-bold text-lg mb-1">{gift.name}</h4>
+                      <p className="text-sm text-muted-foreground mb-3 flex-grow">{gift.description}</p>
+                      <div className="flex items-center justify-center gap-1 mb-4">
                         <Coins className="w-4 h-4 text-yellow-500" />
-                        <span className="font-bold">{gift.price}</span>
+                        <span className="font-bold text-base">{gift.price}</span>
                       </div>
                       <Button 
                         size="sm" 
-                        className="w-full"
+                        className="w-full mt-auto"
                         disabled={coins < gift.price}
-                        onClick={() => setCoins(prev => prev - gift.price)}
+                        onClick={() => handleBuyGift(gift.price)}
                       >
-                        Buy
+                        Send Gift
                       </Button>
                     </CardContent>
                   </Card>
@@ -102,50 +107,50 @@ export default function GiftsPage() {
           ))}
         </TabsContent>
 
-        <TabsContent value="coins" className="space-y-6">
+        <TabsContent value="coins" className="mt-6">
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {coinPackages.map((pkg, index) => (
-              <Card key={index} className={`relative ${pkg.popular ? 'ring-2 ring-purple-500' : ''}`}>
+              <Card key={index} className={`relative hover:shadow-xl transition-shadow duration-300 ${pkg.popular ? 'ring-2 ring-purple-500 shadow-lg' : ''}`}>
                 {pkg.popular && (
-                  <Badge className="absolute -top-2 left-1/2 -translate-x-1/2 bg-purple-500">
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-purple-500 px-3 py-1 text-sm">
                     Popular
                   </Badge>
                 )}
                 <CardContent className="p-6 text-center">
-                  <div className="text-3xl mb-2">💰</div>
+                  <div className="text-4xl mb-3"><span role="img" aria-label="coin bag">💰</span></div>
                   <div className="flex items-center justify-center gap-1 mb-2">
-                    <Coins className="w-5 h-5 text-yellow-500" />
-                    <span className="text-2xl font-bold">{pkg.coins.toLocaleString()}</span>
+                    <Coins className="w-6 h-6 text-yellow-500" />
+                    <span className="text-3xl font-bold">{pkg.coins.toLocaleString()}</span>
                   </div>
                   {pkg.bonus > 0 && (
-                    <div className="text-sm text-green-600 mb-2">
-                      + {pkg.bonus} Bonus
-                    </div>
+                    <Badge variant="secondary" className="bg-green-100 text-green-700">
+                      + {pkg.bonus.toLocaleString()} Bonus
+                    </Badge>
                   )}
-                  <div className="text-lg font-bold text-purple-600 mb-4">{pkg.price}</div>
-                  <Button className="w-full">Buy</Button>
+                  <div className="text-xl font-bold text-primary my-4">{pkg.price}</div>
+                  <Button className="w-full bg-green-500 hover:bg-green-600 text-white">Buy Now</Button>
                 </CardContent>
               </Card>
             ))}
           </div>
         </TabsContent>
 
-        <TabsContent value="leaderboard" className="space-y-4">
+        <TabsContent value="leaderboard" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-yellow-500" />
+              <CardTitle className="flex items-center gap-2 text-2xl">
+                <Trophy className="w-7 h-7 text-yellow-500" />
                 Top Gifters
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {leaderboard.map((user) => (
-                  <div key={user.rank} className="flex items-center gap-4 p-3 rounded-lg bg-muted/50">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
-                      user.rank === 1 ? 'bg-yellow-500 text-white' :
-                      user.rank === 2 ? 'bg-gray-400 text-white' :
-                      user.rank === 3 ? 'bg-orange-600 text-white' :
+                  <div key={user.rank} className="flex items-center gap-4 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold ${
+                      user.rank === 1 ? 'bg-yellow-400 text-white' :
+                      user.rank === 2 ? 'bg-slate-400 text-white' :
+                      user.rank === 3 ? 'bg-orange-400 text-white' :
                       'bg-muted text-muted-foreground'
                     }`}>
                       {user.rank}
@@ -153,16 +158,18 @@ export default function GiftsPage() {
                     <img 
                       src={user.avatar} 
                       alt={user.name}
-                      className="w-10 h-10 rounded-full"
+                      className="w-12 h-12 rounded-full border-2 border-primary/50"
+                      data-ai-hint={user.dataAiHint}
                     />
                     <div className="flex-1">
-                      <div className="font-bold">{user.name}</div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="font-bold text-base">{user.name}</div>
+                      <div className="text-sm text-muted-foreground flex items-center gap-1">
+                        <Gift className="w-4 h-4 text-pink-400" />
                         {user.gifts.toLocaleString()} gifts sent
                       </div>
                     </div>
                     {user.rank <= 3 && (
-                      <div className="text-2xl">
+                      <div className="text-3xl">
                         {user.rank === 1 ? '🥇' : user.rank === 2 ? '🥈' : '🥉'}
                       </div>
                     )}
