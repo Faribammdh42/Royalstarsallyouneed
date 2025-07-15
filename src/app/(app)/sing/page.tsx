@@ -2,7 +2,6 @@
 'use client';
 
 import * as React from 'react';
-import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -113,11 +112,6 @@ export default function SingPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <PageHeader
-        title="Sing with AI"
-        description="Describe the music you want to create and let AI do the rest. Or, choose a song and record your own karaoke version."
-      />
-
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="space-y-6">
           <Card>
