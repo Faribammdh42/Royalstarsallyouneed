@@ -1,69 +1,113 @@
+
+'use client';
+
+import * as React from 'react';
 import { PageHeader } from '@/components/page-header';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Search, Mic, Users, Music, Gift } from 'lucide-react';
+import { Mic, MicOff, Music, Send } from 'lucide-react';
+import { ChatBubble } from '@/components/chat-bubble';
 
-const chatRooms = [
-  { name: 'Pop Lovers', members: 128, online: 45, type: 'voice', gifts: 234, imageUrl: 'https://placehold.co/40x40', dataAiHint: 'microphone pop' },
-  { name: 'Rock & Roll Hall', members: 89, online: 23, type: 'live', gifts: 156, imageUrl: 'https://placehold.co/40x40', dataAiHint: 'electric guitar' },
-  { name: 'Hip-Hop Heads', members: 231, online: 67, type: 'voice', gifts: 445, imageUrl: 'https://placehold.co/40x40', dataAiHint: 'dj turntable' },
-  { name: 'Synthwave Central', members: 56, online: 12, type: 'chat', gifts: 89, imageUrl: 'https://placehold.co/40x40', dataAiHint: 'synthesizer keyboard' },
-  { name: 'Karaoke Kings & Queens', members: 42, online: 18, type: 'live', gifts: 167, imageUrl: 'https://placehold.co/40x40', dataAiHint: 'singing microphone' },
-  { name: 'AI Music Creators', members: 77, online: 34, type: 'voice', gifts: 298, imageUrl: 'https://placehold.co/40x40', dataAiHint: 'robot music' },
+const initialParticipants = [
+  { name: 'Ali', micOn: true, avatar: 'https://placehold.co/40x40.png', dataAiHint: 'man singing' },
+  { name: 'Niloofar', micOn: false, avatar: 'https://placehold.co/40x40.png', dataAiHint: 'woman smiling' },
+  { name: 'Reza', micOn: true, avatar: 'https://placehold.co/40x40.png', dataAiHint: 'man portrait' },
+  { name: 'Sara', micOn: false, avatar: 'https://placehold.co/40x40.png', dataAiHint: 'woman portrait' },
+  { name: 'You', micOn: true, avatar: 'https://placehold.co/40x40.png', dataAiHint: 'user icon' },
 ];
 
-export default function ChatsPage() {
+const initialMessages = [
+    { sender: 'Ali', text: 'This is a great song!', isMe: false },
+    { sender: 'You', text: 'I know, right? The vibe is amazing.', isMe: true },
+    { sender: 'Reza', text: 'Let\'s do a duet next!', isMe: false },
+];
+
+
+export default function RoomPage() {
+    const [participants, setParticipants] = React.useState(initialParticipants);
+    const [messages, setMessages] = React.useState(initialMessages);
+    const [newMessage, setNewMessage] = React.useState('');
+    const chatContainerRef = React.useRef<HTMLDivElement>(null);
+
+    const handleSendMessage = () => {
+        if (newMessage.trim()) {
+            setMessages(prev => [...prev, { sender: 'You', text: newMessage, isMe: true }]);
+            setNewMessage('');
+        }
+    };
+    
+    const toggleMyMic = () => {
+        setParticipants(prev => prev.map(p => p.name === 'You' ? {...p, micOn: !p.micOn} : p));
+    }
+
+    React.useEffect(() => {
+        if(chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [messages]);
+    
   return (
-    <div className="container mx-auto px-4 py-8">
-      <PageHeader title="Chat Rooms" description="Join a room and sing live with others.">
-        <div className="relative w-full max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-          <Input placeholder="Search rooms..." className="pl-10" />
-        </div>
+    <div className="container mx-auto px-4 py-8 flex flex-col h-[calc(100vh-10rem)]">
+      <PageHeader title="Pop Lovers Room" description="Live Karaoke & Chat">
+        <Button variant="outline">
+            <Music className="mr-2"/>
+            Playing: "Desert Rose"
+        </Button>
       </PageHeader>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {chatRooms.map(room => (
-          <Card key={room.name} className="hover:shadow-primary/20 hover:shadow-lg transition-shadow">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-4 mb-3">
-                <Avatar className="size-12 relative">
-                  <AvatarImage src={room.imageUrl} data-ai-hint={room.dataAiHint} />
-                  <AvatarFallback>{room.name.charAt(0)}</AvatarFallback>
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-card"></div>
-                </Avatar>
-                <div className="flex-1">
-                  <h3 className="font-bold">{room.name}</h3>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Users className="w-3 h-3" />
-                    <span>{room.members}</span>
-                    <span className="text-green-500">• {room.online} online</span>
-                  </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow min-h-0">
+        {/* Participants List */}
+        <Card className="flex flex-col">
+            <CardContent className="p-4 flex-grow overflow-y-auto">
+                <h3 className="font-bold mb-4">Participants ({participants.length})</h3>
+                <div className="space-y-3">
+                    {participants.map(p => (
+                        <div key={p.name} className="flex items-center gap-3">
+                             <Avatar>
+                                <AvatarImage src={p.avatar} data-ai-hint={p.dataAiHint} />
+                                <AvatarFallback>{p.name.charAt(0)}</AvatarFallback>
+                             </Avatar>
+                             <span className="font-medium flex-grow">{p.name}</span>
+                             {p.micOn ? <Mic className="text-green-500"/> : <MicOff className="text-muted-foreground"/>}
+                        </div>
+                    ))}
                 </div>
-              </div>
-              
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex gap-2">
-                  <Badge variant={room.type === 'live' ? 'destructive' : room.type === 'voice' ? 'default' : 'secondary'}>
-                    {room.type === 'live' && <Mic className="w-3 h-3 mr-1" />}
-                    {room.type === 'voice' && <Music className="w-3 h-3 mr-1" />}
-                    {room.type}
-                  </Badge>
-                </div>
-                <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                  <Gift className="w-3 h-3" />
-                  <span>{room.gifts}</span>
-                </div>
-              </div>
-              
-              <Button className="w-full">Join Room</Button>
             </CardContent>
-          </Card>
-        ))}
+        </Card>
+
+        {/* Chat Area */}
+        <Card className="md:col-span-2 flex flex-col">
+            <CardContent className="p-4 flex flex-col flex-grow">
+                 <h3 className="font-bold mb-4">Live Chat</h3>
+                 <div ref={chatContainerRef} className="flex-grow space-y-4 overflow-y-auto pr-2">
+                    {messages.map((msg, index) => (
+                        <ChatBubble key={index} sender={msg.sender} text={msg.text} isMe={msg.isMe} />
+                    ))}
+                 </div>
+                 <div className="mt-4 flex gap-2">
+                    <Input 
+                        placeholder="Type your message..."
+                        value={newMessage}
+                        onChange={(e) => setNewMessage(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                    />
+                    <Button onClick={handleSendMessage}>
+                        <Send />
+                    </Button>
+                 </div>
+            </CardContent>
+        </Card>
       </div>
+
+       <Button 
+            onClick={toggleMyMic}
+            className="fixed bottom-24 right-8 w-16 h-16 rounded-full shadow-lg"
+            variant={participants.find(p => p.name === 'You')?.micOn ? 'default' : 'secondary'}
+        >
+            {participants.find(p => p.name === 'You')?.micOn ? <Mic size={28}/> : <MicOff size={28}/>}
+        </Button>
     </div>
   );
 }
