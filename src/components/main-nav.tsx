@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Home, Mic, Music, Clapperboard, MessageSquare, User, Upload, Settings, LogOut, Globe, Gift, Video, Link as LinkIcon, Wand2 } from 'lucide-react';
-import { Logo } from './logo';
 
 const navItems = [
   { href: '/home', label: 'Home', icon: Home },
@@ -23,7 +22,7 @@ export function MainNav() {
     <div className="flex flex-col h-full bg-background/80 justify-between p-4 w-full">
       <div>
         <div className="p-4 mb-4 flex items-center justify-center">
-           <Logo />
+           <h1 className="text-2xl font-bold text-primary">RoyalStars</h1>
         </div>
         <nav className="flex flex-col gap-2">
           {navItems.map((item) => {
