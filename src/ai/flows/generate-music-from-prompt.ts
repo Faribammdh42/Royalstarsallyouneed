@@ -1,4 +1,4 @@
-// 'use server'; // Disabled for static export
+'use server';
 
 /**
  * @fileOverview AI music generation from prompts. Allows users to enter a prompt
@@ -20,6 +20,7 @@ export type GenerateMusicInput = z.infer<typeof GenerateMusicInputSchema>;
 
 const GenerateMusicOutputSchema = z.object({
   musicDataUri: z.string().describe('The generated music as a data URI.'),
+  lyrics: z.string().describe('The generated lyrics for the music.'),
 });
 export type GenerateMusicOutput = z.infer<typeof GenerateMusicOutputSchema>;
 
@@ -96,6 +97,7 @@ const generateMusicFlow = ai.defineFlow(
     );
     return {
       musicDataUri: 'data:audio/wav;base64,' + (await toWav(audioBuffer)),
+      lyrics: lyrics,
     };
   }
 );

@@ -5,13 +5,13 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Home, Mic, Music, Clapperboard, MessageSquare, User, Upload, Settings, LogOut, Globe, Gift, Video, Link as LinkIcon } from 'lucide-react';
+import { Home, Mic, Music, Clapperboard, MessageSquare, User, Upload, Settings, LogOut, Globe, Gift, Video, Link as LinkIcon, Wand2 } from 'lucide-react';
 import { Logo } from './logo';
 
 const navItems = [
   { href: '/home', label: 'Home', icon: Home },
-  { href: '/record', label: 'Record', icon: Video },
-  { href: '/generate', label: 'Generate', icon: Music },
+  { href: '/sing', label: 'Sing', icon: Mic },
+  { href: '/moment', label: 'Moments', icon: Clapperboard },
   { href: '/chats', label: 'Chats', icon: MessageSquare },
   { href: '/gifts', label: 'Gifts', icon: Gift },
 ];

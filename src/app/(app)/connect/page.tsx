@@ -1,10 +1,10 @@
 'use client';
 
 import * as React from 'react';
-import { PageHeader } from '@/components/page-header';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { PageHeader } from '../../../components/page-header';
+import { Button } from '../../../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Badge } from '../../../components/ui/badge';
 import { Globe, Music, Zap, CheckCircle, XCircle } from 'lucide-react';
 // import { checkAllConnections } from '@/lib/api';
 
