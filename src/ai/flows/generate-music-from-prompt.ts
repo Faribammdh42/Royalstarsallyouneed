@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -15,6 +16,7 @@ import wav from 'wav';
 
 const GenerateMusicInputSchema = z.object({
   prompt: z.string().describe('A description of the type of music to generate.'),
+  style: z.string().describe('The musical style of the song (e.g., Sad, Happy, Rap, Dreamy).')
 });
 export type GenerateMusicInput = z.infer<typeof GenerateMusicInputSchema>;
 
@@ -58,9 +60,10 @@ async function toWav(
 const lyricsPrompt = ai.definePrompt({
   name: 'generateLyricsPrompt',
   input: { schema: GenerateMusicInputSchema },
-  prompt: `You are a creative songwriter. Based on the following prompt, write a short, single-verse song or poem.
+  prompt: `You are a creative songwriter. Based on the following prompt and style, write a short, single-verse song or poem.
   
   Prompt: {{{prompt}}}
+  Style: {{{style}}}
   
   Be creative and interpret the prompt musically. The output should be just the lyrics, no titles or other text.`,
 });
