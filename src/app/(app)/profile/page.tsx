@@ -75,7 +75,7 @@ export default function ProfilePage() {
              <div className="grid grid-cols-3 gap-2 text-center p-4">
                 <div>
                     <p className="text-lg font-bold">{user.stats.creations}</p>
-                    <p className="text-xs text-muted-foreground">Creations</p>
+                    <p className="text-xs text-muted-foreground">talky walky family</p>
                 </div>
                 <div>
                     <p className="text-lg font-bold">{user.stats.followers}</p>
