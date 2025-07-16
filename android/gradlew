@@ -1,0 +1,6 @@
+#!/bin/bash
+
+JAVACMD="java"
+CLASSPATH="gradle/wrapper/gradle-wrapper.jar"
+
+"$JAVACMD" -cp "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"

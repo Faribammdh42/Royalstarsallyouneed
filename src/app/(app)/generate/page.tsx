@@ -30,7 +30,7 @@ export default function GeneratePage() {
 
     setIsLoading(true);
     try {
-      const result = await generateMusic({ prompt });
+      const result = await generateMusic({ prompt, style: 'pop' });
       
       const newTrack = {
         title: prompt.length > 30 ? prompt.substring(0, 27) + '...' : prompt,

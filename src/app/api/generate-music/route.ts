@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const result = await generateMusic({prompt});
+    const result = await generateMusic({prompt, style: 'pop'});
     return NextResponse.json(result);
   } catch (error) {
     console.error('Error generating music:', error);
